@@ -1,4 +1,5 @@
 # WebScraping-MiniProject
+This is a project made by a Junior at Cleveland High School.
 ## Installation
 
 Make sure you have Python 2.7.10 up to 2.7.14 installed.
