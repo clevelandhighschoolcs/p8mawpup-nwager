@@ -20,7 +20,7 @@ in your Path environmental variable by doing this (Windows):
 2. Select the Advanced system settings tab.  
 3. Click the Environment Variables button.  
 4. Under System Variables, select Path, click Edit, then click Browse.  
-5. Find the folder (it's probably in Downloads) and put it in the Path (you can type `path` into the console to check if its in Path).
+5. Find the folder (it's probably in Downloads) and put it in the Path (you can type `path` into the console to check if it's in Path).
 
 Here's a slightly fast gif of that:
 
