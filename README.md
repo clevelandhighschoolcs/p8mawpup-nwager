@@ -72,7 +72,7 @@ The example should look like this:
 
 If you got everything to work, then yay! You're done!
 
-Here's a flowchart I made using draw.io:
+Here's a flowchart I made using [draw.io](https://www.draw.io/):
 
 ![weatherscraper.py flowchart](/images/WeatherScraperDiagram.png)
 
