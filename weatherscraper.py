@@ -1,20 +1,31 @@
 import requests                   # import all these libraries
 import pandas as pd               # don't forget to pip install!!
 from bs4 import BeautifulSoup
-from splinter import Browser
-import time
-import argparse
-#import pickle                    Ignore these;
-#import csv                       I was going to use them
-#from datetime import datetime    but that was too much work
+from splinter import Browser      # also sorry there are so many
+import time                       # I should've been more efficient
+import argparse                   # but I didn't have enough time
+from ConfigParser import SafeConfigParser
+import os
+from os import path
 
 # "pip install -r requirements.txt" for packages
 
 # example: to skip the temperature, type into console:
-#     runwebscraper.py --skiptemp 5 40 minutes 'San Francisco'
+#     runwebscraper.py --skiptemp 5 40 minutes "San Francisco"
 # you have to type an interval, time length, and city in the command
 
 def scrape():
+
+   # check if the INI file exists
+   # if not, create the file and set the variables to "none"
+   if path.exists("weatherconfig.ini") == False:
+      f = open("weatherconfig.ini","w+")
+      f.write("[forecast]\n")
+      f.write("periods=none\n")
+      f.write("short_descs=none\n")
+      f.write("temps=none\n")
+      f.write("descs=none\n")
+      f.close()
 
    # parse user inputs into arguments for program
    parser = argparse.ArgumentParser(description='Process some intervals.')
@@ -54,12 +65,6 @@ def scrape():
 
    scrapeCounter = 0   # this number goes up by 1 each time a cycle is completed
 
-   # set variable to "none" so the word "none" shows if a parameter is skipped
-   periodChange = "none"
-   short_descChange = "none"
-   tempChange = "none"
-   descChange = "none"
-
 
    browser = Browser('chrome')                # choose Chrome as the browser
    #browser.driver.set_window_size(640, 480)  # Ignore, I decided I didn't want to open a specific browser size
@@ -92,7 +97,16 @@ def scrape():
       city = soup.find('h2', attrs={'class': 'panel-title'})
       city_text = city.text
       print("Monitoring weather for " + city_text)  # tell the user the city
-		
+      
+      parser = SafeConfigParser()
+      parser.read('weatherconfig.ini')    # use SafeConfigParser to read the file
+
+      # set the comparison variables to the previous values in the INI file
+      periodChange = parser.get('forecast', 'periods')
+      short_descChange = parser.get('forecast', 'short_descs')
+      tempChange = parser.get('forecast', 'temps')
+      descChange = parser.get('forecast', 'descs')
+      
       # get the time period, short description, temperature (Farenheight), and long description
       period_tags = seven_day.select(".tombstone-container .period-name")
       periods = [pt.get_text() for pt in period_tags]
@@ -100,25 +114,37 @@ def scrape():
       temps = [t.get_text() for t in seven_day.select(".tombstone-container .temp")]
       descs = [d["title"] for d in seven_day.select(".tombstone-container img")]
 
+      f = open("weatherconfig.ini","w+")  # open the INI file
+      # write in those new values in the INI
+      f.write("[forecast]\n")
+      f.write("periods=" + str(periods) + "\n")
+      f.write("short_descs=" + str(short_descs) + "\n")
+      f.write("temps=" + str(temps) + "\n")
+      descsstring = str(descs).replace("%","")  # little trick to get rid of "%" sign bc it screws up the data
+
+      f.write("descs=" + str(descsstring) + "\n")
+
+      f.close()  # close the file
 
       # check if change is detected and if the parameter is not skipped
       # then notify via printing in console
-	
-      if periodChange != periods and args.skipperiod == False:
+
+
+      if periodChange != str(periods) and args.skipperiod == False:
          print("TIME PERIOD CHANGE")
-         periodChange = periods
+         periodChange = str(periods)
       
-      if tempChange != temps and args.skiptemp == False:
+      if tempChange != str(temps) and args.skiptemp == False:
          print("TEMPERATURE CHANGE")
-         tempChange = temps
+         tempChange = str(temps)
 
-      if descChange != descs and args.skipdesc == False:
+      if descChange != str(descsstring) and args.skipdesc == False:
          print("LONG DESCRIPTION CHANGE")
-         descChange = descs
+         descChange = str(descs)
 
-      if short_descChange != short_descs and args.skipshort_desc == False:
+      if short_descChange != str(short_descs) and args.skipshort_desc == False:
          print("SHORT DESCRIPTION CHANGE")
-         short_descChange = short_descs
+         short_descChange = str(short_descs)
 
 
       # check if any parameters were skipped
