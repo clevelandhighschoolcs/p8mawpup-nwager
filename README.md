@@ -1,5 +1,5 @@
 # WebScraping-MiniProject
-This is a project made by a junior at Cleveland High School.
+This is a project made by a junior at Cleveland High School. Flowchart at the bottom.
 ## Installation
 
 Make sure you have Python 2.7.10 up to 2.7.14 installed.
@@ -72,6 +72,10 @@ The example should look like this:
 ![Weather Scraping Example - skipdesc](/images/webscraperpic.PNG)
 
 If you got everything to work, then yay! You're done!
+
+Here's the flowchart of the core algorithm:
+
+![PaWPUP Flowchart](/images/PaWPUPnwagerFlowchart.png)
 
 ### Special Thanks To  
 [Master Python Web Scraping: Get Your Data Back](https://hackernoon.com/mastering-python-web-scraping-get-your-data-back-e9a5cc653d88)  
