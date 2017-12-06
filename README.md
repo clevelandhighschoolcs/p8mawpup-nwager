@@ -38,7 +38,7 @@ You can look at the code here, in GitHub. I left a lot of comments ;).
 
 
 ## Usage
-The .py file scrapes the weather forecast from forecast.weather.gov and gets the high and low temperatures, time period, short description, and long description. The program prints any changes it detects. It also arranges all the data into a pandas table (pandas.DataFrame).
+The .py file scrapes the weather forecast from forecast.weather.gov and gets the high and low temperatures, time period, short description, and long description. The program prints any changes it detects. It also arranges all the data into a pandas table (pandas.DataFrame). It also saves the data into a separate INI file in the same folder, so when you come back later it will check if anything has changed.
 
 To run the file without skipping any parameters, you can type this example into the console:  
 `python weatherscraper.py 2 4 seconds "Portland"`  
