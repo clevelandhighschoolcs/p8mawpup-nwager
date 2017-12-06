@@ -34,7 +34,7 @@ Next, follow these steps:
 3. Set up your virtual environment.
 4. Before running the .py file, type `pip install -r requirements.txt` into the console to download the required packages for scraping.
 
-You can look at the code here, in GitHub. I left a lot of comments ;).
+You can look at the code here, in GitHub. The file should have a good amount of comments.
 
 
 ## Usage
