@@ -7,12 +7,20 @@ import argparse                   # but I didn't have enough time
 from ConfigParser import SafeConfigParser
 import os
 from os import path
+from twilio.rest import Client
 
 # "pip install -r requirements.txt" for packages
 
 # example: to skip the temperature, type into console:
 #     runwebscraper.py --skiptemp 5 40 minutes "San Francisco"
 # you have to type an interval, time length, and city in the command
+
+account_sid = 'ACf4c0b57408f916faa17aef730562cb61'
+auth_token = 'f323736f3adaf0a8984364ec9131eb92'
+twilio_numb = '+19718034237'
+my_numb = '+15037043189'
+
+client = Client(account_sid, auth_token)
 
 def scrape():
 
@@ -170,6 +178,12 @@ def scrape():
               "period": periods
           })
       print(weather)  # print the table
+      
+      client.messages.create(
+         body=str(weather),
+         to=my_numb,
+         from_=twilio_numb
+      )
 
 
       # add 1 to the total cycles completed
