@@ -15,10 +15,10 @@ from twilio.rest import Client
 #     runwebscraper.py --skiptemp 5 40 minutes "San Francisco"
 # you have to type an interval, time length, and city in the command
 
-#account_sid =
-#auth_token =
-#twilio_numb =
-#my_numb =
+account_sid = 'XXX'
+auth_token = 'XXX'
+twilio_numb = 'XXX'
+my_numb = 'XXX'
 
 client = Client(account_sid, auth_token)
 
