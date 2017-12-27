@@ -1,4 +1,4 @@
-# WebScraping-MiniProject
+# WebScraping MiniProject by Noah Wager
 This is a project made by a junior at Cleveland High School. Flowchart at the bottom.
 ## Installation
 
